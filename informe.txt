@@ -1,0 +1,26 @@
+Pruebas del juego:
+-Funcionan tormentas
+-Funciona tienda
+-funciona bombas
+-funciona undo
+-¡¡¡Funciona mapa con todo!!!! (incluso con espacios en las descripciones)
+
+Cambios:
+-Pequeños arreglos de formato y de integración entre versiones (pequeños decisiones de qué es mejor)
+-Quitado ArrayList sin sentido (solo porque el profesor pedia usar iteradores) de las instrucciones disponibles Interpreter
+-Mensaje de ayuda creado a partir de getSyntax() de cada instruccion.
+-Hacer mapa con todo.
+
+Arreglos de "Known issues":
+1)Añadido el shield al robot panel
+2)Dejado toString() que tiene sentido y facilita las cosas.
+3)Me parece bien porque así pueden tener propiedades diferentes y los atributos items y isSpaceShip no tienen sentido en Trench/Bunker, por lo que no heredar haría que ocupasen memoria innecesariamente.
+	Por tanto, no valoro que esté mal heredar aquí.
+4)Arreglado simplemente poniendo el nombre apropiado.
+
+
+Mapas:
+-madrid-all.txt: juntados mapas de las tres prácticas
+-madrid-allConEspacios.txt: El mapa anterior con las descripciones entre comillas y con espacios entre palabras
+-madrid-all-incorrecto1.txt: Mapa mal definido - Un lugar especial sale como nave espacial.
+-madrid-all-incorrecto2.txt: Mapa mal definido - Un objeto está ubicado en un lugar especial.

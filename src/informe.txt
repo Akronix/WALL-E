@@ -1,0 +1,18 @@
+Pruebas del juego:
+-Funcionan tormentas
+-Funciona tienda
+-funciona bombas
+-¡¡¡Funciona mapa con todo!!!! (incluso con espacios en las descripciones)
+
+Cambios:
+-Pequeños arreglos de formato
+-Quitado ArrayList sin sentido (solo porque el profesor pedia usar iteradores) de las instrucciones disponibles Interpreter
+- ayuda con getSyntax para instrucciones.
+-Hacer mapa con todo.
+
+Arreglos de "Known issues":
+1)Añadido el shield al robot panel
+2)Dejado toString() que tiene sentido y facilita las cosas.
+3)Me parece bien porque así pueden tener propiedades diferentes y los atributos items y isSpaceShip no tienen sentido en Trench/Bunker, por lo que no heredar haría que ocupasen memoria innecesariamente;
+	Por tanto, no valoro que esté mal.
+4)Arreglado simplemente poniendo el nombre apropiado.

@@ -1,0 +1,16 @@
+tp.pr5
+tp.pr5.cityLoader
+tp.pr5.cityLoader.cityLoaderExceptions
+tp.pr5.cityLoader.testprofesor
+tp.pr5.controller
+tp.pr5.instructions
+tp.pr5.instructions.exceptions
+tp.pr5.instructions.testprofesor
+tp.pr5.items
+tp.pr5.items.testprofesor
+tp.pr5.testprofesor
+tp.pr5.userInterfaces
+tp.pr5.utilities
+tp.pr5.view.console
+tp.pr5.view.gui
+tp.pr5.view.observersInterfaces
