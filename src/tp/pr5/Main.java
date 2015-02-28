@@ -60,8 +60,10 @@ public class Main {
 	
 	//Messages:
 	public static final String WRONG_INTERFACE_MESSAGE = "Wrong type of interface"+Interpreter.LINE_SEPARATOR;
-	public static final String MAP_NOT_SPECIFIED_MESSAGE = "Map file not specified"+Interpreter.LINE_SEPARATOR;
-	public static final String INTERFACE_NOT_SPECIFIED_MESSAGE = "Interface not specified"+Interpreter.LINE_SEPARATOR;
+	public static final String MAP_NOT_SPECIFIED_MESSAGE = "Map file not specified"+Interpreter.LINE_SEPARATOR
+			+ "->Loading default local testing map" + Interpreter.LINE_SEPARATOR;
+	public static final String INTERFACE_NOT_SPECIFIED_MESSAGE = "Interface not specified"+Interpreter.LINE_SEPARATOR
+			+ "->Loading default user interface: both" + Interpreter.LINE_SEPARATOR;
 	
 	
 	//// Commons-cli \\\\
@@ -76,13 +78,13 @@ public class Main {
 		options.addOption("h", "help", false, "Shows this help message");
 		
 		//interface option:
-		Option interfaceOption = new Option("i", "interface", true, "The type of interface : console, swing or both");
+		Option interfaceOption = new Option("i", "interface", false, "The type of interface : console, swing or both");
 		interfaceOption.setArgs(1);
 		interfaceOption.setArgName("type");
 		options.addOption(interfaceOption);
 		
 		//map option:
-		Option mapOption = new Option("m", "map", true, "File with the description of the city");
+		Option mapOption = new Option("m", "map", false, "File with the description of the city");
 		mapOption.setArgs(1);
 		mapOption.setArgName("mapfile");
 		options.addOption(mapOption);
@@ -113,40 +115,38 @@ public class Main {
 			System.exit(0);
 		}
 		
-		else {
-			//Check if input has the map field
-			if (cmd.hasOption('m')) {
-				//Check if input has interface field
-				if (cmd.hasOption('i')) {
-					interfaceArg = cmd.getOptionValue('i');
-					interfaceChosen = InterfaceModesEnum.parse(interfaceArg);
-							
-					if (interfaceChosen == null) {
-						System.err.print(WRONG_INTERFACE_MESSAGE);
-						System.exit(3);
-					}
-				}
-				else {
-					System.err.print(INTERFACE_NOT_SPECIFIED_MESSAGE);
-					System.exit(1);
-				}
-				
-				directoryMap = cmd.getOptionValue('m');
-					try{
-						inputFile = new FileInputStream (directoryMap);
-					}
-					//If file hasn't been found
-					catch (FileNotFoundException e){
-						System.err.print("Error reading the map file: "+directoryMap+" (No existe el fichero o el directorio)" + Interpreter.LINE_SEPARATOR);
-						System.exit(2);						
-					}
-				}
-			
-			else {
-				System.err.print(MAP_NOT_SPECIFIED_MESSAGE);
-				System.exit(1);
+		//Check if input has interface field
+		if (cmd.hasOption('i')) {
+			interfaceArg = cmd.getOptionValue('i');
+			interfaceChosen = InterfaceModesEnum.parse(interfaceArg);
+					
+			if (interfaceChosen == null) {
+				System.err.print(WRONG_INTERFACE_MESSAGE);
+				System.exit(3);
 			}
-		}				
+		}
+		else {
+			System.out.print(INTERFACE_NOT_SPECIFIED_MESSAGE);
+			interfaceChosen = InterfaceModesEnum.both;
+		}
+			
+		//Check if input has the map field
+		if (cmd.hasOption('m')){
+			directoryMap = cmd.getOptionValue('m');
+			try{
+				inputFile = new FileInputStream (directoryMap);
+			}
+			//If file hasn't been found
+			catch (FileNotFoundException e){
+				System.err.print("Error reading the map file: "+directoryMap+" (No existe el fichero o el directorio)" + Interpreter.LINE_SEPARATOR);
+				System.exit(2);						
+			}
+		}	
+		else {
+			System.out.print(MAP_NOT_SPECIFIED_MESSAGE);
+			inputFile = null;
+		}
+			
 	}
 	
 	
@@ -176,7 +176,7 @@ public class Main {
 			System.err.print("Error reading the map file: "+directoryMap+" "
 					+ioe.toString());
 			System.exit(2);
-			}
+		}
 	}
 	
 	//// main \\\\
@@ -192,10 +192,14 @@ public class Main {
 		processArguments(args);
 
 		//Loading map
-		loadMap(inputFile);
-
-		//Loading local map for testing:
-		//loadLocalMap();
+		if (inputFile != null)
+			loadMap(inputFile);
+		else
+			loadLocalMap();
+		
+		System.out.print("------------------------------------------"+Interpreter.LINE_SEPARATOR);
+		System.out.print("*********** WELCOME TO WALL-E by Akronix ***********"+Interpreter.LINE_SEPARATOR);
+		System.out.print("------------------------------------------"+Interpreter.LINE_SEPARATOR);
 		
 		//Initializing game engine
 		robotEngine = new RobotEngine (city,city.getInitialPlace(),Direction.NORTH);
@@ -223,34 +227,34 @@ public class Main {
 		
 		return shop;
 	}
-
+	
+	/**
+	 * Set some default places for a sample city
+	 * @return A <code>Place[]</code> array 
+	 */
 	private static Place[] createPlaces(){
 	//Crea todos lugares, les añade los objetos que haya en ellos y los devuelve en un array de lugares
 		Place [] places = new Place[4];
-		places[0] = new Place("ENTRADA",false,"hola");
-		places[0].addItem(new CodeCard ("beatiful-key","esto abre todo","1"));
-		places[1] = new Place("COMEDOR",false,"a comer");
-		places[2] = new Place("NAVE",true,"adios");
-		places[3] = new Place("Lugar", false,"Aqui hay una prueba");
+		places[0] = new Place("ENTRY",false,"hello");
+		places[0].addItem(new CodeCard ("beatiful-key","This opens everything","1"));
+		places[1] = new Place("DINER",false,"food foooood");
+		places[2] = new Place("NAVE",true,"Job done! Goodbyyee");
+		places[3] = new Place("Place", false,"Just a place");
 		places[0].addItem(new Garbage("newspapers","news on sports",50));
-        places[0].addItem(new Fuel("grapes","celebrations of the new year",3,10));
-        places[0].addItem(new Fuel("Coal","Be careful with this fuel because it is extremely contaminant",-80,1));
+        places[0].addItem(new Fuel("grapes","Just some healthy fruits",3,10));
+        places[0].addItem(new Fuel("Coal","Be careful with this fuel because it is extremely contaminant",-60,1));
         places[0].addItem(new CodeCard("Spaceballs-card","This is the kind of combination an idiot would have on his luggage","12345"));
-        places[0].addItem(new Garbage ("newspapers","",5));
-        places[0].addItem(new Fuel ("grapes","",20,2));
-        places[0].addItem(new Bomb ("stone","lala",0,50));
+        places[0].addItem(new Garbage ("newspapers","Titular says: 'Akronix is the best!' OMG!!",5));
+        places[0].addItem(new Fuel ("grapes","Just some healthy fruits",20,2));
+        places[0].addItem(new Bomb ("stone","It's just a harmless stone...or not?",0,50));
 		return places;
 	}
-
-
-	
 	
 	/**
 	 * Set the connections between places creating the city streets
 	 * @param places Array with all the places of the city
 	 * @return An <code>Street[]</code> array 
 	 */
-	
 	private static Street[] createStreets(Place[] places){
 		Street[] streets = new Street[3];
 		streets[0] = new Street(places[0], Direction.SOUTH, places[1]);

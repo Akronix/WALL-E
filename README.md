@@ -32,9 +32,15 @@ The eclipse project needs to have added to the build path these libraries: commo
 The GUI is using swing.
 
 ## How do I get it working?
+### Executing the program
+Just download the WALL-E.jar file and execute it with:
 
-WALL-E.jar + mapas + tipo interfaz
+    java -jar WALL-E.jar
+You will load the default configuration with that, for more interesting configurations execute the command below to see the usage:
 
+    java -jar WALL-E.jar -h
+    
+### Working with the source
 If what you want is to use the project inside Eclipse, the quickest way is just forking the repo, downloading locally and importing the folder in the path you have downloaded it. Note that then you will be using my configuration settings for this project in eclipse. Note that to compile this project into .class files you need a version of JDK >= 1.7
 
 ## List of design patterns used
