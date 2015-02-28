@@ -6,11 +6,11 @@ package tp.pr5.userInterfaces;
 //local packages:
 import tp.pr5.RobotEngine;
 /**
- * 	Abstract Factory to give a factory depends the interface mode which wants the user.<br/>
- * 	Each Factory have to be able to create the view components, create the appropriate controller and
+ * 	Abstract Factory to give a factory depending on the interface mode which wants the user to use<br/>
+ * 	Each Factory has to be able to create the view components, create the appropriate controller and
  * 	 associate the corresponding view elements to that controller.<br/>
  *  In this way, you can change or add new interface modes implementations while extends
- *  this abstract class and the app should works perfectly.<br/>
+ *  this abstract class and the app should works seamlessly.<br/>
  * @author Abel Serrano Juste
  */
 public abstract class InterfaceModesAbstractFactory {
@@ -19,7 +19,7 @@ public abstract class InterfaceModesAbstractFactory {
 	protected RobotEngine model;
 	
 	/**
-	 * Common constructor fot all the factories. Take in a reference to the model.
+	 * Common constructor for all the factories. Take in a reference to the model.
 	 * @param model Reference to the model of the application
 	 */
 	protected InterfaceModesAbstractFactory(RobotEngine model) {
@@ -27,7 +27,7 @@ public abstract class InterfaceModesAbstractFactory {
 	}
 
 	/**
-	 * Returns the appropriate interface mode factory and preparate it to be launched.
+	 * Returns the appropriate interface mode factory and prepare it to be launched.
 	 * @param interfaceMode Interface Mode selected by the user
 	 * @param robotEngine model reference
 	 * @return Interface Modes Factory to launch the app.

@@ -12,7 +12,7 @@ import tp.pr5.view.gui.NavigationPanel;
 import tp.pr5.view.gui.RobotPanel;
 
 /**
- * Factory for the interface which combines the swing view with the ouput of the console.
+ * Factory for the interface which combines the swing view with the output of the console.
  * @author Abel Serrano Juste
  */
 public class BothFactory extends InterfaceModesAbstractFactory {

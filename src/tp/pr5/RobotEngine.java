@@ -37,9 +37,9 @@ public class RobotEngine {
 	public static final String QUIT_MESSAGE = "WALL·E says: I have communication problems. Bye bye"+Interpreter.LINE_SEPARATOR;
 	
 	//Others
-	private Instruction previousInstructions; //Store the last instruction executes to can undo it.
+	private Instruction previousInstruction; //Store the last instruction executes to can undo it.
 	private boolean updatedInstruction; /*Avoid to store more than one instruction in each prosecution of one instruction (communicateRobot calls)
-										It's necessary to don't push undo after make and undo of an undo and get into infinite loop*/
+										It's necessary to not push undo after make and undo of an undo and get into infinite loop*/
 	
 	
 	/**
@@ -71,7 +71,7 @@ public class RobotEngine {
 		this.fuel = 100;
 		this.shield = 100;
 
-		this.previousInstructions = null;
+		this.previousInstruction = null;
 		this.updatedInstruction = false;
 		this.navigator.initNavigator();
 		this.inventory.clear();
@@ -116,7 +116,7 @@ public class RobotEngine {
 			c.configureContext(this,navigator,inventory);
 			c.execute();
 			if (!updatedInstruction) {
-				previousInstructions = c;
+				previousInstruction = c;
 				updatedInstruction = true;
 			}
 			
@@ -233,7 +233,7 @@ public class RobotEngine {
 	 * @return The last correct instruction
 	 */
 	public Instruction getLastInstruction() {
-		return previousInstructions;
+		return previousInstruction;
 	}
 	
 		////Notifications\\\\
