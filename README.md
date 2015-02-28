@@ -15,7 +15,6 @@ Code is mostly in english, (except for maybe some comments I wrote in spanish).
 * enunciados/: Directory that contains all the statements of assigments and final examns for this course implemented in this repo. (spanish)
 * images/ : Directory that contains the pictures used for the videogame.
 * src/ : Directory that contains all the java source code. Also this directory is organized in directories by packages.
-* testProfesor/ : Directory that contains all the JUnit tests for a lot of the classes.
 * Horda de WALLES.ogv : A video-demo of the app with a little change so that it shows 20 GUI instead of 1 and they synchronize the state changes between them seamlessly.
 * informe.txt : short description in spanish of the last changes and decisions taken.
 * madrid-all-incorrecto{1,2}.txt: bad defined maps. Just to test incorrect inputs.
