@@ -4,6 +4,8 @@
 package tp.pr5.view.gui;
 
 //java packages
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,6 +19,8 @@ import javax.swing.JSeparator;
 import javax.swing.KeyStroke;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
@@ -84,17 +88,20 @@ public class MainWindow extends JFrame implements RobotEngineObserver{
 		private static final KeyStroke ctrlZKeyStroke = KeyStroke.getKeyStroke("control Z");
 		
 		//Icons
-		public static final ImageIcon WALLE_SAD = new ImageIcon("images/walleEyes.png");
-		public static final ImageIcon WALLE_SPACESHIP = new ImageIcon("images/walleAtSpaceShip.png");
-		public static final ImageIcon WALLE_UNPOWERED = new ImageIcon("images/walleSad.png");
+		public static final ImageIcon WALLE_EYES = new ImageIcon("images/walleEyes.jpg");
+		public static final ImageIcon WALLE_HAPPY = new ImageIcon("images/walleHappy.jpg");
+		public static final ImageIcon WALLE_UNPOWERED = new ImageIcon("images/walleNoFuel.jpg");
+		public static final ImageIcon WALLE_ABOUT = new ImageIcon("images/walleAbout.jpg");
+		public static final ImageIcon WALLE_NOSHIELD = new ImageIcon("images/walleNoShield.jpg");
 		
-		//Messages
-		public static final String ABOUT_MSG = "<html><center><h2>WALL-E 0.1<h2>"
+		//'About' panel
+		public static final String ABOUT_HEADING = "<html><center><h2>WALL-E 0.1<h2></center></html>";
+		public static final String ABOUT_MSG = "<html><center>"
 				+ "<p>WALL-E is a videogame developed for the Programming Technologies course of the Universidad Complutense de Madrid</p>"
 				+ "<h3>by Abel 'Akronix' Serrano Juste</h3>"
 				+ "e-mail: akronix5@gmail.com  web: www.akronix.es github: www.github/Akronix<br>"
 				+ "Copyright (c) 2012-2015<br>"
-				+ "Licensed under GPLv2</center></html>";
+				+ "Licensed under GPLv2 or later. More details in LICENSE file</center></html>";
 
 	//>
 	
@@ -245,7 +252,7 @@ public class MainWindow extends JFrame implements RobotEngineObserver{
 				"Are you sure do you want to exit of the game?",
 				"Confirm exit", JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE,
-				WALLE_SAD);
+				WALLE_EYES);
 		
 		if (choice == JOptionPane.YES_OPTION)
 			controller.requestQuit();
@@ -291,21 +298,25 @@ public class MainWindow extends JFrame implements RobotEngineObserver{
 	 */
 	@Override
 	public void engineOff(String msg) {
+		
 		ImageIcon image = null;
-		String message = null;
-		if (msg.equals(RobotEngine.REACHED_SPACESHIP_MESSAGE)) {
-			image = WALLE_SPACESHIP;
-			message = msg;
+		if (msg.substring(0,RobotEngine.REACHED_SPACESHIP_MESSAGE.length())
+				.equals(RobotEngine.REACHED_SPACESHIP_MESSAGE)) {
+			image = WALLE_HAPPY;
+			
 		}
 			
-		else { //Robot runs out of fuel
+		else if (msg.equals(RobotEngine.RUN_OUT_FUEL_MESSAGE)) //Robot runs out of fuel
 			image = WALLE_UNPOWERED;
-			message = msg;
-		}
-			
+		else if (msg.equals(RobotEngine.SHIELD_RUN_OUT_MESSAGE)) //Robot has no shield
+			image = WALLE_NOSHIELD;
+		
+		/* Removing the prefix: 'WALL·E says: ' from the message */
+		msg = msg.replaceFirst("WALL·E says: ", "");
+		
 		JOptionPane.showMessageDialog(
 				this,
-				message,
+				msg,
 				"GAME OVER",
 				JOptionPane.INFORMATION_MESSAGE,
 				image);
@@ -319,7 +330,27 @@ public class MainWindow extends JFrame implements RobotEngineObserver{
 	 * Shows about dialog
 	 */
 	public void showAbout() {
-	    JOptionPane.showMessageDialog(this,ABOUT_MSG,"About WALL-E", JOptionPane.PLAIN_MESSAGE);
+		JPanel panel = new JPanel ();
+		panel.setSize(600, 400);
+		//panel.setLayout(new GridLayout(3,1));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		JLabel heading = new JLabel(ABOUT_HEADING);
+		heading.setAlignmentX(Component.CENTER_ALIGNMENT);
+		panel.add(heading);
+		JLabel img = new JLabel(WALLE_ABOUT);
+		img.setAlignmentX(CENTER_ALIGNMENT);
+		panel.add(img);
+		panel.add(Box.createVerticalStrut(10));
+		JLabel txt = new JLabel(ABOUT_MSG);
+		txt.setAlignmentX(CENTER_ALIGNMENT);
+		panel.add(txt);
+		
+		JOptionPane optionPane = new JOptionPane(panel,JOptionPane.PLAIN_MESSAGE);
+		JDialog dialog = optionPane.createDialog(this,"About WALL-E");
+		dialog.setSize(600,400);
+		dialog.setVisible(true);
+		
+	    //JOptionPane.showMessageDialog(this,ABOUT_MSG,"About WALL-E", JOptionPane.PLAIN_MESSAGE);
 	}
 	
 	@Override
