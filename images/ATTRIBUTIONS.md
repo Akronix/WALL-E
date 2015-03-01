@@ -1,6 +1,4 @@
 #ATTRIBUTIONS
-##images
-Inside the images/ directory: 
  
 * walleEyes.jpg : [CC-BY-NC-SA 2.0](https://creativecommons.org/licenses/by-nc-sa/2.0/). Thanks to [Adrian S. Jones](https://www.flickr.com/photos/tdr1/). Obtained from <https://flic.kr/p/7w839G>
 * walle{East,North,South,West}.png: [CC-BY-NC-ND 4.0](http://creativecommons.org/licenses/by-nc-nd/4.0/). Thanks to Noctuline. The products or characters depicted in these icons are © by Disney / Pixar. Obtained from: <http://www.iconarchive.com/show/wall-e-icons-by-noctuline/Wall-E-icon.html>
