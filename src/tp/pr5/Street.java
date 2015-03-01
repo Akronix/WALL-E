@@ -1,8 +1,5 @@
 package tp.pr5;
 
-//local packages:
-import tp.pr5.items.CodeCard;
-
 /**
  * A street links two places A and B. All streets are two-way streets. <br/>
  * If a street is defined as Street(A,NORTH,B) this means that Place B is at NORTH of Place A and Place A is at south of Place B
@@ -96,10 +93,10 @@ public class Street implements Cloneable{
 	 * @return <code>true</code> if the street has been opened with the codecard.<br/>
 	 * Note that if the street isn't closed or it isn't the incorrect code, this return <code>false</code>
 	 */
-	public boolean open(CodeCard card){
+	public boolean open(String key){
 	//clave OR clavecarta=1111. clave carta tiene que ser XOR de clave o "1111"
 		
-		if (this.code.equals(card.getCode()))
+		if (this.code.equals(key))
 			this.opened=true;
 		
 		return this.opened;
@@ -111,10 +108,10 @@ public class Street implements Cloneable{
 	 * @param card A code card to close the street
 	 * @return true if the action has been completed, <code>false</code> otherwise
 	 */
-	public boolean close(CodeCard card){
+	public boolean close(String key){
 	//clave OR clavecarta=1111. clave carta tiene que ser XOR de clave o "1111"
 		boolean completed;
-		if (this.code.equals(card.getCode())){ 
+		if (this.code.equals(key)){ 
 			this.opened=false;
 			completed = true;
 		}

@@ -78,9 +78,13 @@ public class GUIController extends Controller implements ActionListener,
 		if (debug) System.out.println("Pulsed button: "+commandFromButton);
 		switch (commandFromButton) {
 		
+		// Commands for the whole app \\
 		case "QUIT": window.userWantsToQuit(); break;
+		case "NEWGAME": this.engine.requestStart(); break;
+		case "ABOUT": window.showAbout(); break;
 		
-		//Commands from InstructionsPanel 
+		// Commands for WALL-E \\
+			//Commands from InstructionsPanel 
 		case "TURN": this.processInstruction("TURN "+instructionsPanel.getRotation()); break;
 			
 		case "PICK": this.processInstruction("PICK "+instructionsPanel.getItemIdToPick()); break;
@@ -91,25 +95,25 @@ public class GUIController extends Controller implements ActionListener,
 		
 		case "USE": this.processInstruction("OPERATE "+robotPanel.getSelectedId()); break;
 		
-		//Follow commands don't have to take more arguments & can be called directly with the command:
+			//Following commands don't have to take more arguments & can be called directly with the command:
 		case "MOVE": this.processInstruction("MOVE"); break;
 			
-		//From MainWindow:
+			//From MainWindow:
 		case "UNDO": this.processInstruction("UNDO"); break;
-		case "NEWGAME": this.engine.requestStart(); break;
 		
-		//Storms:
+		// Storms \\
 		case "sandstorm": this.processInstruction("STORM SANDSTORM"); break;
 		case "acidrain": this.processInstruction("STORM ACIDRAIN"); break;
 		case "tornado": this.processInstruction("STORM TORNADO"); break;
 		
+		// Others: \\
 		//PlaceCells:
 		case "PlaceDescription": 
 			PlaceInfo placeToShow = ((PlaceCell) source).getPlace();
 			navigationPanel.placeScanned(placeToShow); 
 			break;
+		
 		}
-			
 	}	
 	
 	@Override

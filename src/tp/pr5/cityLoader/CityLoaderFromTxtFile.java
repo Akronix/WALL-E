@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 
 import tp.pr5.City;
 import tp.pr5.Direction;
-import tp.pr5.Interpreter;
 import tp.pr5.Place;
 import tp.pr5.Shop;
 import tp.pr5.Street;
@@ -141,7 +140,7 @@ public class CityLoaderFromTxtFile {
 				for (int i=0; i<result.groupCount();i++){
 					
 					//Uncomment for showing the tokens recognized
-					//System.out.print(result.group(i+1)+Interpreter.LINE_SEPARATOR);
+					//System.out.print(result.group(i+1)+endl);
 
 					line[i] = result.group(i+1);
 				

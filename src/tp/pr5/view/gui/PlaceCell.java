@@ -24,6 +24,7 @@ public class PlaceCell extends JButton{
 	//model elements<
 	private PlaceInfo place;
 	private boolean visited;
+	private boolean discovered;
 	//>
 	
 	/**
@@ -34,6 +35,7 @@ public class PlaceCell extends JButton{
 		super();
 		this.place = null;
 		this.visited = false;
+		this.discovered = false;
 		this.setEnabled(false);
 		this.setVisible(true);
 	}
@@ -45,6 +47,7 @@ public class PlaceCell extends JButton{
 	 */
 	public void visit(ActionListener listener){
 		this.visited = true;
+		this.discovered = true;
 		this.setAlignmentX(Component.CENTER_ALIGNMENT);
 		this.setAlignmentY(Component.CENTER_ALIGNMENT);
 		this.setText(place.getPlaceName());
@@ -53,6 +56,14 @@ public class PlaceCell extends JButton{
 		this.setBackground(Color.GREEN);
 		this.addActionListener(listener);
 		this.setActionCommand("PlaceDescription");
+	}
+	
+	/**
+	 * Set this place cell as discovered.<br/>
+	 */
+	public void discover(){
+		this.discovered = true;
+		this.setBackground(Color.RED);
 	}
 	
 	/**
@@ -86,12 +97,21 @@ public class PlaceCell extends JButton{
 	public boolean isVisited(){
 		return visited;
 	}
+	
+	/**
+	 * Tells if this placeCell has been discovered
+	 * @return <code>true</code> if it's flag as discovered, <code>false</code> otherwise
+	 */
+	public boolean isDiscovered() {
+		return this.discovered;
+	}
 
 	/**
 	 * Undo visit this place cell and empty all its attributes.
 	 */
 	public void reset() {
 		this.visited = false;
+		this.discovered = false;
 		this.place = null;
 		this.setText("");
 		this.setName("");

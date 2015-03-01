@@ -96,4 +96,18 @@ public class ConsoleView implements RobotEngineObserver,NavigationObserver,Inven
 		
 	}
 
+	@Override
+	public void updateDiscoverLockPlace(PlaceInfo placeLocked,
+			Direction currentHeading) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateUnlockPlace(PlaceInfo placeUnlocked,
+			Direction currentHeading) {
+		System.out.print("Yeah!! WALL·E has has been able to unlock this street"
+				+ " and now WALL·E can move to: "+placeUnlocked.getPlaceName()+Interpreter.LINE_SEPARATOR);
+	}
+
 }

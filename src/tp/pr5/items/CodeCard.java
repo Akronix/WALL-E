@@ -41,15 +41,7 @@ public class CodeCard extends PlaceableItem{
 	 * @return <code>true</code> if the code card can complete the action of opening or closing a street. Otherwise it returns <code>false</code>.
 	 */
 	public boolean use(RobotEngine r, NavigationModule nm){
-		Street s = nm.getHeadingStreet();
-		boolean success = false;
-		if (s!=null){ //If the street is null we return false directly
-			if (s.isOpen())
-				success = s.close(this); //try to close it with this card
-			else
-				success = s.open(this); //else, try to open it with this card
-		}
-		return success;
+		return nm.useCard(code);
 	}
 	
 	/**
@@ -58,15 +50,7 @@ public class CodeCard extends PlaceableItem{
 	 * @return code>true</code> if the code card can complete the action of undo opening or closing a street. Otherwise it returns <code>false</code>.
 	 */
 	public boolean revert(RobotEngine r, NavigationModule nm){
-		Street s = nm.getHeadingStreet();
-		boolean success = false;
-		if (s!=null){ //If the street is null we return false directly
-			if (s.isOpen())
-				success = s.close(this); //try to close it with this card
-			else
-				success = s.open(this); //else, try to open it with this card
-		}
-		return success;
+		return nm.useCard(code);
 	}
 	
 	

@@ -143,7 +143,8 @@ public class RobotEngine {
 		}
 		else if (this.navigator.atSpaceship()) {
 			for (RobotEngineObserver obs : engineObservers) 
-				obs.engineOff(RobotEngine.REACHED_SPACESHIP_MESSAGE);
+				obs.engineOff(RobotEngine.REACHED_SPACESHIP_MESSAGE
+						+"Total Score: "+this.rm+Interpreter.LINE_SEPARATOR);
 			fin = true;
 		}
 		else if (this.shield ==0) {

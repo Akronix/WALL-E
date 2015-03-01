@@ -3,6 +3,7 @@ package tp.pr5;
 //java packages:
 import java.util.Vector;
 
+
 //local packages:
 import tp.pr5.City;
 import tp.pr5.Direction;
@@ -89,7 +90,6 @@ public class NavigationModule {
 	 */
 	public Street getHeadingStreet(){
 		return cityMap.lookForStreet(currentPlace, currentHeading);
-		//return connectionsToStreets.get(currentHeading);
 	}
 	
 	/**
@@ -136,8 +136,12 @@ public class NavigationModule {
 			}
 			
 			//it's possible street is closed, in this case it throws:
-			else
+			else {
+				//updating views:
+				for (NavigationObserver Nobs : navigatorObservers)
+					Nobs.updateDiscoverLockPlace(currentPlace, currentHeading);
 				throw new InstructionExecutionException (CLOSED_STREET_MESSAGE);
+			}
 
 		}
 		
@@ -201,6 +205,29 @@ public class NavigationModule {
 		//updating views:
 		for (NavigationObserver Nobs : navigatorObservers)
 			Nobs.placeScanned(this.currentPlace);
+	}
+	
+	
+	public boolean useCard(String key) {
+		Street s = this.getHeadingStreet();
+		boolean success = false;
+		
+		if (s!=null){ //If the street is null we return false directly
+			Place oppositeEdge = s.nextPlace(currentPlace);
+			if (s.isOpen()){
+				if (s.close(key)) { //try to close it with this card
+					success = true;
+				}
+			}
+			else if (s.open(key)){ //else, try to open it with this card
+				success = true;
+				//updating views:
+				for (NavigationObserver Nobs : navigatorObservers)
+					Nobs.updateUnlockPlace(oppositeEdge, this.currentHeading);
+			}
+		}
+		return success;
+		
 	}
 	
 	//// GUI \\\\

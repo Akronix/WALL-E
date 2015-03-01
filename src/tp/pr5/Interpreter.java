@@ -1,11 +1,5 @@
 package tp.pr5;
 
-//java packages:
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Iterator;
-
 //local packages:
 import tp.pr5.instructions.*;
 import tp.pr5.instructions.exceptions.WrongInstructionFormatException;
@@ -52,7 +46,9 @@ public class Interpreter {
 	
 	
 	/**
-	 * Generates a new instruction according to the user input
+	 * Generates a new instruction according to the user input.
+	 * Note: I don't like at all this implementation.
+	  It is written like that just because lecturer forced us to do it in this way 
 	 * @param line A string with the user input
 	 * @return The instruction read from the given line. If the instruction is not correct, then it throws an exception.
 	 * @throws WrongInstructionFormatException If the instruction isn't recognized or is wrong typed.
@@ -74,7 +70,7 @@ public class Interpreter {
 			
 			//else we increment counter and repeat
 			catch (WrongInstructionFormatException wife){
-				//Nothing, we're looping until we've try with all the possible types of instruction.
+				//Nothing, we're looping until we've tried with all the possible types of instruction.
 			}
 		}
 

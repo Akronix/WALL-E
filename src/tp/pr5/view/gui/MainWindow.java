@@ -4,6 +4,7 @@
 package tp.pr5.view.gui;
 
 //java packages
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -20,7 +21,6 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 
-
 import tp.pr5.RobotEngine;
 //local packages
 import tp.pr5.controller.GUIController;
@@ -36,6 +36,7 @@ import tp.pr5.view.observersInterfaces.RobotEngineObserver;
  * The visible places are updated when the robot performs a MOVE action. Once a place is visited, the user can click on it in order to display the place description (similar to the RADAR command).
  * @author Abel Serrano Juste
  */
+@SuppressWarnings("serial")
 public class MainWindow extends JFrame implements RobotEngineObserver{
 	
 	//view components<
@@ -54,6 +55,7 @@ public class MainWindow extends JFrame implements RobotEngineObserver{
 		//menu bar components<
 		private JMenu extras;
 		private JMenuItem undo;
+		private JMenuItem about;
 	
 		//>
 	
@@ -86,7 +88,13 @@ public class MainWindow extends JFrame implements RobotEngineObserver{
 		public static final ImageIcon WALLE_SPACESHIP = new ImageIcon("images/walleAtSpaceShip.png");
 		public static final ImageIcon WALLE_UNPOWERED = new ImageIcon("images/walleSad.png");
 		
-		//Auxiliary
+		//Messages
+		public static final String ABOUT_MSG = "<html><center><h2>WALL-E 0.1<h2>"
+				+ "<p>WALL-E is a videogame developed for the Programming Technologies course of the Universidad Complutense de Madrid</p>"
+				+ "<h3>by Abel 'Akronix' Serrano Juste</h3>"
+				+ "e-mail: akronix5@gmail.com  web: www.akronix.es github: www.github/Akronix<br>"
+				+ "Copyright (c) 2012-2015<br>"
+				+ "Licensed under GPLv2</center></html>";
 
 	//>
 	
@@ -215,7 +223,17 @@ public class MainWindow extends JFrame implements RobotEngineObserver{
 		extras.add(undo);
 		
 		menuBar.add(extras);
-
+		
+		//// About menu \\\\
+		JMenu help = new JMenu("Help");
+		
+		//about option \\
+		about = new JMenuItem("About",KeyEvent.VK_H);
+		about.setActionCommand("ABOUT");
+		
+		help.add(about);
+		
+		menuBar.add(help);
 	}
 
 	/**
@@ -297,6 +315,13 @@ public class MainWindow extends JFrame implements RobotEngineObserver{
 		
 	}
 	
+	/**
+	 * Shows about dialog
+	 */
+	public void showAbout() {
+	    JOptionPane.showMessageDialog(this,ABOUT_MSG,"About WALL-E", JOptionPane.PLAIN_MESSAGE);
+	}
+	
 	@Override
 	public void raiseError(String msg) {
 		JOptionPane.showMessageDialog(this, msg, "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -324,6 +349,7 @@ public class MainWindow extends JFrame implements RobotEngineObserver{
 		newGame.addActionListener(controller);
 		quit.addActionListener(controller);
 		undo.addActionListener(controller);
+		about.addActionListener(controller);
 		
 		extras.addMenuListener(controller);
 		

@@ -220,6 +220,54 @@ public class NavigationPanel extends JPanel implements NavigationObserver{
 		printInLog(placeDescription.toString());
 		
 	}
+	
+	@Override
+	public void updateDiscoverLockPlace(PlaceInfo placeLocked, Direction currentHeading) {
+		
+		int lockedRow = actualRow;
+		int lockedCol = actualCol;
+		
+		//First, we change the coordinates of which PlaceCell we want to access according to the direction
+		switch (currentHeading) {
+			case NORTH: --lockedRow; break;
+			case EAST: ++lockedCol; break;
+			case SOUTH: ++lockedRow; break;
+			case WEST: --lockedCol; break;
+			default: break;
+		}
+		//We use an auxiliar variable which references to the vista PlaceCell which will be updated.
+		PlaceCell lockedCell = places[lockedRow][lockedCol];
+		
+		if (!lockedCell.isDiscovered())
+			lockedCell.discover();
+		
+	}
+
+	@Override
+	public void updateUnlockPlace(PlaceInfo placeUnlocked, Direction currentHeading) {
+		
+		int lockedRow = actualRow;
+		int lockedCol = actualCol;
+		
+		//First, we change the coordinates of which PlaceCell we want to access according to the direction
+		switch (currentHeading) {
+			case NORTH: --lockedRow; break;
+			case EAST: ++lockedCol; break;
+			case SOUTH: ++lockedRow; break;
+			case WEST: --lockedCol; break;
+			default: break;
+		}
+		//We use an auxiliar variable which references to the vista PlaceCell which will be updated.
+		PlaceCell lockedCell = places[lockedRow][lockedCol];
+				
+		if (!lockedCell.isDiscovered() || !lockedCell.isVisited()) {
+			lockedCell.setPlace(placeUnlocked);
+			lockedCell.visit(controller);
+		}
+		
+		lockedCell.setBackground(Color.GREEN);
+		
+	}
 
 	@Override
 	public void resetMap() {

@@ -51,7 +51,19 @@ public interface NavigationObserver extends ObserverInterface{
 	 * @param newHeading New robot heading
 	 */
 	public abstract void updateDirection(Direction newHeading);
-
+	
+	/**
+	 * Place not accessible but discovered by the user
+	 * @param placeLocked place
+	 */
+	public abstract void updateDiscoverLockPlace(PlaceInfo placeLocked, Direction currentHeading);
+	
+	/**
+	 * Place that is to not be allowed to enter in, but now it is
+	 * @param placeUnlocked place
+	 */
+	public abstract void updateUnlockPlace(PlaceInfo placeUnlocked, Direction currentHeading);
+	
 	/**
 	 * Clear the previous map representation and put it blank<br/>
 	 * It's required in order to create a new game.
