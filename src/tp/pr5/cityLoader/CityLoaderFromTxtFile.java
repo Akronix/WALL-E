@@ -27,8 +27,8 @@ import tp.pr5.utilities.Miscellanous;
  */
 public class CityLoaderFromTxtFile {
 	
-	//Main attributes:
-	private String testingFile;
+	//Just for testing:
+	//private String testingFile;
 	
 	//Attributes for process the file:
 	private Place[] placeMap;

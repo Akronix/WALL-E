@@ -51,3 +51,6 @@ If what you want is to use the project inside Eclipse, the quickest way is just 
 4. Abstract Factory: Abstract Factory to give a factory depending on the interface mode which wants the user to use. In this way, it is very easy to change or to add new user interface modes. Classes implementing this are in tp.pr5.userInterfaces
 5. Interpreter: The interpreter is in charge of converting the user input in an Instruction instance that the robot engine can understand. The class implementing this is: tp.pr5.Interpreter.java
 6. Memento: Previous instruction executed by the robot engine is stored in its attribute 'previousInstruction', so that it can undo that instruction. Also, when UndoInstruction is executed it stores the lastinstrunction executed inside it. Thereby the user can only undo once, next undo will be a redo (undo + undo = redo). Classes implementing this pattern are pr.tp5.RobotEngine and pr.tp5.instructions.UndoInstruction
+
+## Licensing and attributions
+Attributions for the images I have used are located in the file images/ATTRIBUTIONS.md and all the information related to the licenses is described in LICENSE.md

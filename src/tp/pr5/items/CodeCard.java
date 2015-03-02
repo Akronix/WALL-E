@@ -3,7 +3,6 @@ package tp.pr5.items;
 //local packages:
 import tp.pr5.NavigationModule;
 import tp.pr5.RobotEngine;
-import tp.pr5.Street;
 
 /**
  * A CodeCard can open or close the door placed in the streets. 

@@ -20,7 +20,6 @@ import javax.swing.KeyStroke;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
@@ -332,7 +331,6 @@ public class MainWindow extends JFrame implements RobotEngineObserver{
 	public void showAbout() {
 		JPanel panel = new JPanel ();
 		panel.setSize(600, 400);
-		//panel.setLayout(new GridLayout(3,1));
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		JLabel heading = new JLabel(ABOUT_HEADING);
 		heading.setAlignmentX(Component.CENTER_ALIGNMENT);
