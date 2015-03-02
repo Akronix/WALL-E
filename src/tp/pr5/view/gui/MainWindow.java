@@ -98,10 +98,10 @@ public class MainWindow extends JFrame implements RobotEngineObserver{
 		public static final String ABOUT_HEADING = "<html><center><h2>WALL-E 0.1<h2></center></html>";
 		public static final String ABOUT_MSG = "<html><center>"
 				+ "<p>WALL-E is a videogame developed for the Programming Technologies course of the Universidad Complutense de Madrid</p>"
-				+ "<h3>by Abel 'Akronix' Serrano Juste</h3>"
+				+ "<h3>by &lt;Abel 'Akronix' Serrano Juste&gt;</h3>"
 				+ "e-mail: akronix5@gmail.com  web: www.akronix.es github: www.github/Akronix<br>"
 				+ "Copyright (c) 2012-2015<br>"
-				+ "Licensed under GPLv2 or later. More details in LICENSE file</center></html>";
+				+ "Licensed under GPLv2 or later. More details in LICENSE.md file</center></html>";
 
 	//>
 	
